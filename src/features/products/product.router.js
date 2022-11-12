@@ -97,7 +97,7 @@ app.get("/:category/:sortType", async(req,res)=> {
 //     }
 // })
 
-app.get("/:category/:id", async(req,res)=> {
+app.get("/:category/:id/spec", async(req,res)=> {
     try{
         let product = await Product.find({_id:req.params.id,category:req.params.category});
         res.send(product);
