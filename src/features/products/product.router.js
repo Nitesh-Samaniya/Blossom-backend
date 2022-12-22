@@ -23,55 +23,57 @@ app.get("/:category", async(req,res)=> { //limit left
 //sort asc or desc according to price and rating 
 app.get("/:category/:sortType", async(req,res)=> {
     let {category, sortType} = req.params;
+    const {limit=10, page=1} = req.query;
+
     try{
 
         if(sortType === "asc"){
-            let products = await Product.find({category: category}).sort({price: 1})
+            let products = await Product.find({category: category}).sort({price: 1}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "desc"){
-            let products = await Product.find({category: category}).sort({price: -1})
+            let products = await Product.find({category: category}).sort({price: -1}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "three"){
-            let products = await Product.find({category: category, rating: 3})
+            let products = await Product.find({category: category, rating: 3}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "four"){
-            let products = await Product.find({category: category, rating: 4})
+            let products = await Product.find({category: category, rating: 4}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "five"){
-            let products = await Product.find({category: category, rating: 5})
+            let products = await Product.find({category: category, rating: 5}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "ot"){
-            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 1, $lte: 10}}]})
+            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 1, $lte: 10}}]}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "et"){
-            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 11, $lte: 20}}]})
+            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 11, $lte: 20}}]}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "tt"){
-            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 21, $lte: 30}}]})
+            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 21, $lte: 30}}]}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "ff"){
-            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 41, $lte: 50}}]})
+            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 41, $lte: 50}}]}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
         else if(sortType === "af"){
-            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 51, $lte: 500}}]})
+            let products = await Product.find({ $and: [{category: category}, {price: {$gte: 51, $lte: 500}}]}).limit(12).skip((page-1)*limit);
             res.status(201).send(products);
         }
 
