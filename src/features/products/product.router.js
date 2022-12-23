@@ -108,4 +108,15 @@ app.get("/:category/:id/spec", async(req,res)=> {
     }
 })
 
+app.post("/", async(req,res)=> {
+    const id = req.headers["authorization"];
+    try{
+        const product = new Product({...req.body, userId: id});
+        await product.save();
+        return res.status(200).send(product);
+    }catch(e){
+        return res.status(400).send(e)
+    }
+})
+
 module.exports = app;
