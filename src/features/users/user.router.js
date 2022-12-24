@@ -21,7 +21,7 @@ app.get("/:id", async(req,res)=> {//user's id
 })
 
 app.post("/signup", async(req,res)=> {
-    let {email, password, userName} = req.body;
+    let {email, password, userName, role} = req.body;
     try{
         let user = await User.findOne({email});
 
@@ -29,7 +29,7 @@ app.post("/signup", async(req,res)=> {
             return res.status(404).send(`Cannot create an account with an existing email ${email}`);
         }
 
-        let newUser = await User.create({email, password, userName});
+        let newUser = await User.create({email, password, userName, role});
         res.send({token: `${newUser.id}:${newUser.email}:${newUser.password}`})
 
     }catch(e){
