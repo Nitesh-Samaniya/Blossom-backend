@@ -43,7 +43,10 @@ app.post("/login", async(req,res)=> {
         let user = await User.findOne({email});
         if(user){
             if(password === user.password){
-                res.send({token: `${user.id}:${email}:${user.password}`})
+                res.send({
+                    token: `${user.id}:${email}:${user.password}`,
+                    user: user
+                })
             }
             else{
                 res.status(401).send("Authentication Failure, incorrect password")
